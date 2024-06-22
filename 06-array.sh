@@ -9,7 +9,7 @@ MOVIES=("RRR" "DITILLU" "MCA")
 
 echo "First movie is : ${MOVIES[0]}"
 echo "Second movie is : ${MOVIES[1]}"
-echo "All movie is : ${MOVIES[@]}"
+echo "All movies are : ${MOVIES[@]}"
 
 
 # @ is symbol of everything
