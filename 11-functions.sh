@@ -1,10 +1,18 @@
 #!/bin/bash
 
 USERID=$(id -u)
+TIMESTAMP=$(data +%F-%H-%M-%S)
+SCRIPT_NAME=$($0 | cut -d "." -f1)
+LOGFILE=/tmp/$SCRIPT_NAME-$TIME_STAMP.log
 
 VALIDATE(){
-    echo "Exit status: $?"
-    echo "What are you doing: $2"
+    if [ $1 -ne 0 ]
+    then
+        echo "$2... FAILURE"
+        exit 1
+    else
+        echo "$2...SUCCESS"
+    fi
 }
 
 if [ $USERID -ne 0 ]
@@ -15,9 +23,9 @@ else
     echo "you are super user."
 fi
 
-dnf install mysql -y 
+dnf install mysql -y &>>$LOGFILE
 VALIDATE $? "Installing MySQL"
 
-dnf install git -y
+dnf install git -y &>>$LOGFILE
 VALIDATE $? "Installing git"
 
